@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const company = require('../controllers/company.controller');
+const company = require('../controllers/company');
 
 router.get('/companies', company.all);
 router.put('/videos/:id', company.update);
