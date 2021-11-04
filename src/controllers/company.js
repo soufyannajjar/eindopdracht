@@ -1,7 +1,7 @@
 const company = require('./../models/company')
 const video = require('../models/video')
 const fs = require('fs');
-const videoFormatAllowed = ["video/mp4"];
+const Helpers = require('../helpers/UploadHelper');
 
 /**
  * Get all companies
@@ -32,7 +32,7 @@ exports.update = async (req, res) => {
     const title = req.body.title;
     if(req.files){
         let file = req.files.file;
-        if(!videoFormatAllowed.includes(file.mimetype)){
+        if(Helpers.allowedFormat(file.mimetype)){
             return res.status(403).send({message:"Only video format files are accepted."});
         }
         let filename = file.name;
