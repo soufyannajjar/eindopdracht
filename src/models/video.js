@@ -1,14 +1,20 @@
 const db = require('../helpers/DatabaseHelper');
 const { T_VIDEO } = require('../utils/Constants');
 
-const deleteVideo = (id) => {
+const findById = (id) => {
+    return db(T_VIDEO).select("*")
+    .where('id', '=', id)
+}
+
+
+const remove = (id) => {
     return db(T_VIDEO).del()
     .where('id', '=', id)
     .returning('*');
 }
 
 
-const updateVideo = (id, title, path) => {
+const update = (id, title, path) => {
     return db(T_VIDEO)
     .update({
         title:title,
@@ -18,4 +24,4 @@ const updateVideo = (id, title, path) => {
     .returning('*');
 }
 
-module.exports = {deleteVideo, updateVideo};
+module.exports = {findById, remove, update};
