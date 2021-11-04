@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  server:
+    container_name: werkstuk_api
+    build: './api'
+    ports:
+      - '3000:3000'
+  db:
+    container_name: werkstuk_database
+    image: 'postgres:13'
+    ports:
+     - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: dev_werkstuk
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_USER: 'postgres'
+    
+
+volumes:
+  data:
