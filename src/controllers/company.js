@@ -1,4 +1,5 @@
 const company = require('./../models/company')
+const video = require('../models/video')
 /**
  * Get all companies
  * @param {*} req
@@ -8,13 +9,13 @@ exports.all = async (req, res) => {
   company
     .findAll()
     .then((companies) => {
-      return res.status(200).send({
+      res.status(200).send({
         count: companies.length,
         companies,
       })
     })
     .catch((err) => {
-      return res.status(500).send(err)
+      res.status(500).send(err)
     })
 }
 
@@ -33,5 +34,20 @@ exports.update = async (req, res) => {
  * @param {*} res
  */
 exports.delete = async (req, res) => {
-  res.status(200).send({ Company: 'Delete' })
+  const {id} = req.params;
+  video.deleteVideo(id).then(data => {
+    if(data){
+        res.status(200).send({
+            message:"Video deleted"
+        })
+    }else{
+        res.status(404).send({
+            message:"Video does not exist !"
+        })
+    }
+    
+  }).catch((err) => {
+    return res.status(500).send(err)
+  })
+  
 }
