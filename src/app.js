@@ -7,7 +7,7 @@ const router = require('./routes/route')
 
 
 const databaseHelper = require("./helpers/DatabaseHelper");
-const initialiseDBHelpers = require('./helpers/InitialiseDBHelpers')
+const initialiseDBHelpers = require('./helpers/InitialiseDBHelpers');
 initialiseDBHelpers.initialiseTables(databaseHelper);
 app.use(express.json());
 
