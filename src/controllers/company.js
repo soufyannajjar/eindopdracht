@@ -30,7 +30,6 @@ exports.all = async (req, res) => {
 exports.update = async (req, res) => {
     const id = req.params.id;
     const title = req.body.title;
-    console.log(req.files)
     if(req.files){
         let file = req.files.file;
         if(!Helpers.allowedFormat(file.mimetype)){

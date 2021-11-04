@@ -1,4 +1,3 @@
-const { expect } = require('@jest/globals');
 const supertest = require('supertest');
 const app = require('../../app');
 const fs = require('fs');
