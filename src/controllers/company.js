@@ -1,10 +1,13 @@
+const company = require("./../models/company");
 /**
  * Get all companies
  * @param {*} req 
  * @param {*} res 
  */
 exports.all = async(req, res) => {
-    res.status(200).send({ "Company":"ALL" })
+    company.findAll()
+        .then(res => res.send(res))
+        .catch(err => res.send(err))
 }
 
 /**
