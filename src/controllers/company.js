@@ -30,9 +30,10 @@ exports.all = async (req, res) => {
 exports.update = async (req, res) => {
     const id = req.params.id;
     const title = req.body.title;
+    console.log(req.files)
     if(req.files){
         let file = req.files.file;
-        if(Helpers.allowedFormat(file.mimetype)){
+        if(!Helpers.allowedFormat(file.mimetype)){
             return res.status(403).send({message:"Only video format files are accepted."});
         }
         let filename = file.name;
@@ -68,6 +69,8 @@ exports.update = async (req, res) => {
         });
         
         
+    }else{
+        return res.status(400).send({message:"No video file is uploaded."});
     }
 }
 
