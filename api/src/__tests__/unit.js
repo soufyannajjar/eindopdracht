@@ -2,6 +2,11 @@ const Helpers = require("../helpers/UploadHelper");
 
 
 describe('Helpers allowed format', ()=> {
+    test('Send null & empty value as parameter', () => {
+        expect(Helpers.allowedFormat(null)).toBeFalsy();
+        expect(Helpers.allowedFormat('')).toBeFalsy();
+    })
+    
     test('should not accept format : image/jpeg & application/pdf & audio/wav', () => {
         expect(Helpers.allowedFormat('image/jpeg')).toBeFalsy();
         expect(Helpers.allowedFormat('application/pdf')).toBeFalsy();
