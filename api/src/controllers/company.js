@@ -39,7 +39,6 @@ exports.update = async (req, res) => {
 
         video.findById(id).then(data => {
             if(data.length == 0){
-                console.log(data.length)
                 return res.status(404).send({
                     message:"Video does not exist."
                 });
