@@ -2,6 +2,7 @@ const company = require('./../models/company')
 const video = require('../models/video')
 const fs = require('fs');
 const Helpers = require('../helpers/UploadHelper');
+const { UPLOAD_PATH } = require('../config/config');
 
 /**
  * Get all companies
@@ -45,7 +46,7 @@ exports.update = async (req, res) => {
             }else{
                 let pathToRemove = data[0].path;
                 fs.unlink(pathToRemove, (err)=> {
-                    let path = `./uploads/${new Date().getTime()}_${filename}`;
+                    let path = `.${UPLOAD_PATH}/${new Date().getTime()}_${filename}`;
                         video.update(id, title, path)
                         .then(data => {
                             file.mv(path, (err)=>{

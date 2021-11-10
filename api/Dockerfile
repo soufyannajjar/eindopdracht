@@ -5,7 +5,7 @@ COPY src /workdir/src
 COPY package*.json /workdir/
 
 WORKDIR /workdir
-
+RUN mkdir videos
 RUN npm install --quiet || cat npm-debug.log
 
 
