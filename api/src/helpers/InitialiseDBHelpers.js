@@ -1,7 +1,7 @@
 const { T_COMPANY, T_VIDEO } = require("../utils/Constants");
 const faker = require("faker");
 const { LOAD_FAKER } = require("../config/config");
-
+console.log("Load faker data : " , LOAD_FAKER);
 module.exports = {
     initialiseTables: async function (db) {
       await db.schema.hasTable(T_COMPANY).then(async (exists) => {
