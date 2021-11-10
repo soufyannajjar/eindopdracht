@@ -1,4 +1,4 @@
-const {POSTGRES_HOST,POSTGRES_NAME, POSTGRES_USER, POSTGRES_PASS} = process.env;
+const {POSTGRES_HOST,POSTGRES_NAME, POSTGRES_USER, POSTGRES_PASS, POSTGRES_PORT} = process.env;
 
 module.exports = {
     development: {
@@ -7,7 +7,8 @@ module.exports = {
             host:POSTGRES_HOST,
             database: POSTGRES_NAME,
             user: POSTGRES_USER,
-            password: POSTGRES_PASS
+            password: POSTGRES_PASS,
+            port:POSTGRES_PORT
         },
         pool: {
             min: 2,

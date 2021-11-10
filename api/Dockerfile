@@ -1,9 +1,16 @@
 FROM node:14
 
-WORKDIR /app
+COPY src /workdir/src
 
-COPY ./ ./
+COPY package*.json /workdir/
 
-RUN npm install
+WORKDIR /workdir
 
-CMD ["node", "src/index.js"]
+RUN npm install --quiet || cat npm-debug.log
+
+
+ENV PORT=3000
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

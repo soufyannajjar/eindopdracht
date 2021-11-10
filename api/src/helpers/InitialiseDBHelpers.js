@@ -1,6 +1,6 @@
 const { T_COMPANY, T_VIDEO } = require("../utils/Constants");
 const faker = require("faker");
-const {FAKER_DATA} = process.env;
+const { LOAD_FAKER } = require("../config/config");
 
 module.exports = {
     initialiseTables: async function (db) {
@@ -15,7 +15,7 @@ module.exports = {
             })
             .then(async () => {
               console.log(`created table ${T_COMPANY}`);
-              if(FAKER_DATA=="true"){
+              if(LOAD_FAKER){
                 await db(T_COMPANY).insert(createFakeCompanies());
                 console.log(`Data inserted in ${T_COMPANY} table`)
               }
@@ -40,7 +40,7 @@ module.exports = {
             })
             .then(async () => {
                 console.log(`created table ${T_VIDEO}`);
-                if(FAKER_DATA=="true"){
+                if(LOAD_FAKER){
                   await db(T_VIDEO).insert(createFakeVideos());
                   console.log(`Data inserted in ${T_VIDEO} table`)
                 }
