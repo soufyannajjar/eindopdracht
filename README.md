@@ -1,62 +1,56 @@
-# Launch docker-compose
-docker-compose up -d
-
-# Stop and remove all containers of eindopdracht
-docker-compose down
-
-
-
-# Project Title
-
-Simple overview of use/purpose.
+## Eindopdracht
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+Api for Emotify. A company that will let other companies upload their promo videos.
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+    cors
+    dotenv
+    express
+    express-fileupload
+    faker
+    fs
+    jest
+    join-js
+    knex
+    nodemon
+    pg
+    supertest
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+Download program via https://github.com/soufyannajjar/eindopdracht
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+* Launch docker-compose
+* Run docker-compose up -d
 
-## Help
+* Endpoints:
+GET /companies
+Returns all the companies from the database
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+PUT /videos
+
+Updates a video from the database
+
+DELETE /videos
+
+Deletes a video from the database
+
+### Stop program 
+* Stop and remove all containers of eindopdracht
+* Run docker-compose down
 
 ## Authors
 
-Contributors names and contact info
-
-
-
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
+Soufyan Najjar
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+This project is licensed under the Eindopdracht License - see the LICENSE.md file for details
 
-## Acknowledgments
