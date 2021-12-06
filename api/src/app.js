@@ -10,7 +10,9 @@ const upload = require('express-fileupload');
 
 const databaseHelper = require("./helpers/DatabaseHelper");
 const initialiseDBHelpers = require('./helpers/InitialiseDBHelpers');
+
 initialiseDBHelpers.initialiseTables(databaseHelper);
+
 app.use(express.json());
 app.use(upload());
 app.use(express.urlencoded({

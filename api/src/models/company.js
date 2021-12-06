@@ -34,7 +34,15 @@ const findAll = () => {
     });
 }
 
+const save = (name, email) => {
+    
+    return db(T_COMPANY).insert({
+        name: name,
+        email: email
+    }).returning("*");
+}
 
 
 
-module.exports = {findAll};
+
+module.exports = {findAll, save};

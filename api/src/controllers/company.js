@@ -24,6 +24,24 @@ exports.all = async (req, res) => {
 }
 
 /**
+ * Create a company
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.add = async (req, res) => {
+    const {name, email} = req.body;
+    company
+    .save(name, email)
+    .then((data) => {
+            res.status(201).send({
+                message: `Company ${name} is created`
+            })
+    }).catch(err=> {
+            res.status(500).send(err)
+    });
+}
+
+/**
  * Update a video
  * @param {*} req
  * @param {*} res
