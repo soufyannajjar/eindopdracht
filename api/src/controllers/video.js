@@ -58,18 +58,23 @@ exports.all = async (req, res) => {
  */
 exports.add = async (req, res) => {
     const {title, id_company} = req.body;
+
+  
     if(!title || !id_company){
         return res.status(400).send({ message: "Bad request" });
     }  
 
     if (req.files) {
         let file = req.files.file;
+
+       
+
         if (!Helpers.allowedFormat(file.mimetype)) {
             return res.status(403).send({ message: "Only video format files are accepted." });
         }
         let filename = file.name;
-
-        let path = `.${UPLOAD_PATH}/${new Date().getTime()}_${filename}`;
+        let path = `${UPLOAD_PATH}/${new Date().getTime()}_${filename}`;
+       
         video.save(title, path, id_company)
             .then(data => {
                 file.mv(path, (err) => {
@@ -77,7 +82,8 @@ exports.add = async (req, res) => {
                         res.status(500).send(err);
                     } else {
                         res.status(201).send({
-                            message: `The file '${filename}' has been saved.`
+                            message: `The file '${filename}' has been saved.`,
+                            video: data[0]
                         })
                     }
                 });
@@ -122,7 +128,7 @@ exports.update = async (req, res) => {
             } else {
                 let pathToRemove = data[0].path;
                 fs.unlink(pathToRemove, (err) => {
-                    let path = `.${UPLOAD_PATH}/${new Date().getTime()}_${filename}`;
+                    let path = `${UPLOAD_PATH}/${new Date().getTime()}_${filename}`;
                     video.update(id, title, path)
                         .then(data => {
                             file.mv(path, (err) => {
@@ -130,7 +136,8 @@ exports.update = async (req, res) => {
                                     res.status(500).send(err);
                                 } else {
                                     res.status(201).send({
-                                        message: `The file '${filename}' has been uploaded.`
+                                        message: `The file '${filename}' has been uploaded.`,
+                                        video: data[0]
                                     })
                                 }
                             });

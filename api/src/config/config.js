@@ -1,4 +1,4 @@
 module.exports = {
    // LOAD_FAKER:false,
-    UPLOAD_PATH: '/videos'
+    UPLOAD_PATH: 'uploads'
 }

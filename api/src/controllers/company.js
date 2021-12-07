@@ -49,11 +49,13 @@ exports.findById = async (req, res) => {
  */
 exports.add = async (req, res) => {
   const { name, email } = req.body;
+
   company
     .save(name, email)
     .then((data) => {
       res.status(201).send({
-        message: `Company ${name} is created`
+        message: `Company ${name} is created`,
+        company: data[0]
       })
     }).catch(err => {
       res.status(500).send(err)
@@ -102,7 +104,8 @@ exports.update = async (req, res) => {
       company.update(id, name, email)
         .then(data => {
           res.status(201).send({
-            message: `The company '${name}' has been modified.`
+            message: `The company '${name}' has been modified.`,
+            company: data[0]
           })
         }).catch(err => {
           res.status(500).send(err)
