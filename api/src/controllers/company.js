@@ -20,6 +20,29 @@ exports.all = async (req, res) => {
 }
 
 /**
+ * Find a company by identifier
+ * @param {*} req
+ * @param {*} res
+ */
+exports.findById = async (req, res) => {
+  const { id } = req.params;
+  company.findById(id).then(data => {
+    if(data.length == 0){
+      res.status(404).send({
+        message:"Company does not exist !"
+      })
+    }else{
+      res.status(200).send({
+        company:data[0]
+      })
+    }
+  }) 
+  .catch((err) => {
+    res.status(500).send(err);
+  })
+}
+
+/**
  * Create a company
  * @param {*} req 
  * @param {*} res 

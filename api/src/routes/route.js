@@ -6,6 +6,7 @@ const movie = require('../controllers/movie')
 
 //Company
 router.get('/companies', company.all);
+router.get('/companies/:id', company.findById);
 router.post('/companies', company.add);
 router.put('/companies/:id', company.update);
 router.delete('/companies/:id', company.delete);
