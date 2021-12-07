@@ -6,12 +6,21 @@ const findById = (id) => {
     .where('id', '=', id)
 }
 
+const save = (name, email, id_company) => {
+    return db(T_VIDEO).insert({
+        name: name,
+        email: email,
+        id_company: id_company
+    }).returning("*");
+}
+
 
 const remove = (id) => {
     return db(T_VIDEO).del()
     .where('id', '=', id)
     .returning('*');
 }
+
 
 
 const update = (id, title, path) => {
@@ -24,4 +33,4 @@ const update = (id, title, path) => {
     .returning('*');
 }
 
-module.exports = {findById, remove, update};
+module.exports = {findById, remove, update, save};

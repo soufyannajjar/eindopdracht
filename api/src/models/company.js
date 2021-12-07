@@ -34,15 +34,39 @@ const findAll = () => {
     });
 }
 
+
+const findById = (id) => {
+    return db(T_COMPANY).select("*")
+    .where('id', '=', id)
+}
+
 const save = (name, email) => {
-    
     return db(T_COMPANY).insert({
         name: name,
         email: email
     }).returning("*");
 }
 
+const remove = (id) => {
+    return db(T_COMPANY).del()
+    .where('id', '=', id)
+    .returning('*');
+}
 
 
 
-module.exports = {findAll, save};
+const update = (id, name, email) => {
+    return db(T_COMPANY)
+    .update({
+        name:name,
+        email:email
+    })
+    .where('id', '=', id)
+    .returning('*');
+}
+
+
+
+
+
+module.exports = {findAll, findById, save, remove, update};

@@ -1,8 +1,4 @@
 const company = require('./../models/company')
-const video = require('../models/video')
-const fs = require('fs');
-const Helpers = require('../helpers/UploadHelper');
-const { UPLOAD_PATH } = require('../config/config');
 
 /**
  * Get all companies
@@ -29,91 +25,67 @@ exports.all = async (req, res) => {
  * @param {*} res 
  */
 exports.add = async (req, res) => {
-    const {name, email} = req.body;
-    company
+  const { name, email } = req.body;
+  company
     .save(name, email)
     .then((data) => {
-            res.status(201).send({
-                message: `Company ${name} is created`
-            })
-    }).catch(err=> {
-            res.status(500).send(err)
+      res.status(201).send({
+        message: `Company ${name} is created`
+      })
+    }).catch(err => {
+      res.status(500).send(err)
     });
 }
 
-/**
- * Update a video
- * @param {*} req
- * @param {*} res
- */
-exports.update = async (req, res) => {
-    const id = req.params.id;
-    const title = req.body.title;
-    if(req.files){
-        let file = req.files.file;
-        if(!Helpers.allowedFormat(file.mimetype)){
-            return res.status(403).send({message:"Only video format files are accepted."});
-        }
-        let filename = file.name;
-
-        video.findById(id).then(data => {
-            if(data.length == 0){
-                return res.status(404).send({
-                    message:"Video does not exist."
-                });
-            }else{
-                let pathToRemove = data[0].path;
-                fs.unlink(pathToRemove, (err)=> {
-                    let path = `.${UPLOAD_PATH}/${new Date().getTime()}_${filename}`;
-                        video.update(id, title, path)
-                        .then(data => {
-                            file.mv(path, (err)=>{
-                                if(err){
-                                    res.status(500).send(err);
-                                }else{
-                                    res.status(201).send({
-                                        message:`The file '${filename}' has been uploaded.`
-                                    })
-                                }
-                            });
-                        }).catch(err => {
-                            res.status(500).send(err)
-                    })
-                });
-            }
-        }).catch(err=> {
-            res.status(500).send(err)
-        });
-        
-        
-    }else{
-        return res.status(400).send({message:"No video file is uploaded."});
-    }
-}
 
 /**
- * Delete a video
+ * Delete a company
  * @param {*} req
  * @param {*} res
  */
 exports.delete = async (req, res) => {
-  const {id} = req.params;
-  video.remove(id).then(data => {
-    if(data.length != 0){
-        fs.unlink(data[0].path, (err) => {
-            res.status(200).send({
-                message:"Video deleted."
-            }); 
-        });
-        
-    }else{
-        res.status(404).send({
-            message:"Video does not exist."
-        })
+  const { id } = req.params;
+  company.remove(id).then(data => {
+    if (data.length != 0) {
+      res.status(200).send({
+        message: "Company deleted."
+      });
+    } else {
+      res.status(404).send({
+        message: "Company does not exist."
+      })
     }
-    
   }).catch((err) => {
     return res.status(500).send(err)
   })
-  
+}
+
+
+/**
+ * Update a company
+ * @param {*} req
+ * @param {*} res
+ */
+exports.update = async (req, res) => {
+  const id = req.params.id;
+  const { name, email } = req.body;
+
+  company.findById(id).then(data => {
+    if (data.length == 0) {
+      return res.status(404).send({
+        message: "Company does not exist."
+      });
+    } else {
+      company.update(id, name, email)
+        .then(data => {
+          res.status(201).send({
+            message: `The company '${name}' has been modified.`
+          })
+        }).catch(err => {
+          res.status(500).send(err)
+        })
+    }
+  }).catch(err => {
+    res.status(500).send(err)
+  });
 }

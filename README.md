@@ -1,4 +1,10 @@
-## Eindopdracht
+## Launch docker-compose
+docker-compose up -d
+
+## Stop and remove all containers of eindopdracht
+docker-compose down
+
+
 
 ## Description
 
