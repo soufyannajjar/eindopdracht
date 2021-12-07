@@ -4,8 +4,8 @@ const fs = require('fs');
 const request = supertest(app);
 
 
-describe('GET /companies', () => {
-    it('should responds with 200',  (next) => {
+describe('Handle /companies endpoint', () => {
+    it('GET /companies should responds with 200',  (next) => {
         request
         .get('/companies')
         .end(function(err, res) {

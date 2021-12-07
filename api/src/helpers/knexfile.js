@@ -4,11 +4,11 @@ module.exports = {
     development: {
         client: 'pg',
         connection: {
-            host:'db',
-            database: 'werkstuk_dev',
-            user: 'postgres',
-            password: 'postgres',
-            port:'5432'
+            host:POSTGRES_HOST,
+            database: POSTGRES_NAME,
+            user: POSTGRES_USER,
+            password: POSTGRES_PASS,
+            port:POSTGRES_PORT
         },
         pool: {
             min: 2,
