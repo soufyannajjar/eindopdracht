@@ -13,6 +13,7 @@ router.delete('/companies/:id', company.delete);
 
 //Video
 router.get('/videos', video.all);
+router.get('/videos/:id', video.findById);
 router.post('/videos', video.add);
 router.put('/videos/:id', video.update);
 router.delete('/videos/:id', video.delete);

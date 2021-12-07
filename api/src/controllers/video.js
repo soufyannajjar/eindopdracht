@@ -25,6 +25,31 @@ exports.all = async (req, res) => {
         })
 }
 
+/**
+ * Find a movie by identifier
+ * @param {*} req
+ * @param {*} res
+ */
+ exports.findById = async (req, res) => {
+    const { id } = req.params;
+    video.findById(id).then(data => {
+      if(data.length == 0){
+        res.status(404).send({
+          message:"Video does not exist !"
+        })
+      }else{
+        res.status(200).send({
+          video:data[0]
+        })
+      }
+    }) 
+    .catch((err) => {
+      res.status(500).send(err);
+    })
+  }
+  
+
+
 
 /**
  * Save a video
