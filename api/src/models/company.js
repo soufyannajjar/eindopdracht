@@ -36,8 +36,20 @@ const findAll = () => {
 
 
 const findById = (id) => {
-    return db(T_COMPANY).select("*")
-    .where('id', '=', id)
+    return db
+    .select( 'co.id as company_id',
+    'co.name as company_name',
+    'co.email as company_email',
+    'vi.id as video_id',
+    'vi.title as video_title',
+    'vi.path as video_path')
+    .from(`${T_COMPANY} as co`)
+    .leftOuterJoin(`${T_VIDEO} as vi`, 'vi.id_company','co.id')
+    .where('co.id', '=', id)
+    .orderBy("co.id","asc")
+    .then((resultSet) => {
+        return joinjs.map(resultSet, resultMaps, 'companyMap', 'company_');
+    });    
 }
 
 const save = (name, email) => {

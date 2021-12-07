@@ -1,15 +1,20 @@
 const db = require('../helpers/DatabaseHelper');
 const { T_VIDEO } = require('../utils/Constants');
 
-const findById = (id) => {
-    return db(T_VIDEO).select("*")
-    .where('id', '=', id)
+const findAll = () => {
+    return db(T_VIDEO).select("*");
+          
 }
 
-const save = (name, email, id_company) => {
+const findById = (id) => {
+    return db(T_VIDEO).select("*")
+    .where('id', '=', id);
+}
+
+const save = (title, path, id_company) => {
     return db(T_VIDEO).insert({
-        name: name,
-        email: email,
+        title:title,
+        path:path,
         id_company: id_company
     }).returning("*");
 }
@@ -33,4 +38,4 @@ const update = (id, title, path) => {
     .returning('*');
 }
 
-module.exports = {findById, remove, update, save};
+module.exports = {findAll, findById, remove, update, save};
